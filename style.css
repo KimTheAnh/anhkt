@@ -65,11 +65,61 @@ main {
 }
 
 .home-banner {
+    overflow: hidden;
+    position: relative;
+}
+
+.home-banner_list-btn {
+    position: absolute;
+    width: 100%;
+    height: 400px;
+    display: flex;
+    z-index: 1;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.home-banner_btn {
+    height: 100%;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.7;
+}
+
+.home-banner_btn:first-child {
+    background: rgb(0, 0, 0);
+    background: linear-gradient(90deg, rgba(0, 0, 0, 1) 0%, rgba(255, 255, 255, 0) 100%);
+
+}
+
+.home-banner_btn:last-child {
+    background: rgb(255, 255, 255);
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 1) 100%);
+
+}
+
+.home-banner_btn div {
+    font-size: 30px;
+    font-weight: 600;
+    color: red;
+}
+
+.home-banner_list {
+    width: 300%;
+    height: 400px;
+    display: flex;
+    transition: all 0.5s linear;
+    /* transform: translateX(0px); */
+}
+
+.home-banner_img {
+    width: 100%;
+    height: 400px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    width: 100%;
-    height: 400px;
 }
 
 .home-product-list {
@@ -82,8 +132,31 @@ main {
 
 .home-product-item {
     border: 1px solid var(--border-color);
-    
 
+}
+
+.home-banner_list-sl {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    /* background-color: red; */
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.home-banner_sl {
+    width: 16px;
+    height: 16px;
+    margin-left: 8px;
+    border-radius: 50%;
+    border: 1px solid var(--border-color);
+}
+
+.home-banner_sl-x {
+    background-color: var(--border-color);
 }
 
 .home-product-item_img {
@@ -102,7 +175,7 @@ main {
 
 .home-product-item_name {
     margin: 12px 0 12px 12px;
-    
+
 }
 
 .sidebar-item {
@@ -110,7 +183,7 @@ main {
     margin-bottom: 20px;
 }
 
-.auth-form  {
+.auth-form {
     padding: 0 20px 20px;
 }
 
@@ -139,7 +212,7 @@ main {
     display: inline-block;
 }
 
-.auth-form_save, 
+.auth-form_save,
 .auth-form_savetext {
     margin-top: 12px;
 }
@@ -158,14 +231,12 @@ main {
     row-gap: 8px;
 }
 
-.auth-form_help {
-
-}
+.auth-form_help {}
 
 .danhmuc-list {
     display: grid;
     grid-template-columns: 1fr;
-    
+
 }
 
 .danhmuc-item {
@@ -185,7 +256,7 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-    
+
 }
 
 .timkiem-input input {
@@ -216,14 +287,9 @@ main {
     background-repeat: no-repeat;
     margin-right: 8px;
     border: 1px solid var(--border-color);
-    
+
 }
 
 .toplike-item_name {
     color: rgb(0, 98, 255);
 }
-
-
-
-
-

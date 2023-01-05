@@ -11,6 +11,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="/themify-icons/themify-icons.css">
     <title>Document</title>
 </head>
 
@@ -31,7 +32,22 @@
         <main>
             <div class="row column-3-1">
                 <div class="content">
-                    <div class="home-banner" style="background-image: url(/img/b53e9bc613d0b6114cc0e4ae1d33bf96_2014940736099744340.png);"></div>
+                    <div class="home-banner">
+                        <div class="home-banner_list-btn">
+                            <div class="home-banner_btn" onclick="bannerImg(0)"><div class="ti-angle-left"></div></div>
+                            <div class="home-banner_btn" onclick="bannerImg(1)"><div class="ti-angle-right"></div></div>
+                        </div>
+                        <div class="home-banner_list-sl">
+                            <div class="home-banner_sl home-banner_sl-x" onclick="sl(0)"></div>
+                            <div class="home-banner_sl" onclick="sl(1)"></div>
+                            <div class="home-banner_sl" onclick="sl(2)"></div>
+                        </div>
+                        <div class="home-banner_list">
+                            <div class="home-banner_img" style="background-image: url(/img/b53e9bc613d0b6114cc0e4ae1d33bf96_2014940736099744340.png);"></div>
+                            <div class="home-banner_img" style="background-image: url(/img/Screenshot\ 2023-01-02\ at\ 09.46.20.png);"></div>
+                            <div class="home-banner_img" style="background-image: url(/img/b53e9bc613d0b6114cc0e4ae1d33bf96_2014940736099744340.png);"></div>
+                        </div>
+                    </div>
                     <div class="home-product-list">
                         <div class="home-product-item">
                             <div class="home-product-item_img" style="background-image: url(/img/b53e9bc613d0b6114cc0e4ae1d33bf96_2014940736099744340.png);"></div>
@@ -114,5 +130,56 @@
         </main>
     </div>
 </body>
+<script>
+    var bannerImgIndex = 0
+    function bannerImg(z) {
+        
+        if(z == 1) {
+            bannerImgIndex++
+            if(bannerImgIndex > 2) bannerImgIndex = 0 
+        } else {
+            bannerImgIndex--
+            if(bannerImgIndex < 0) bannerImgIndex = 2
+        }
+        sl(bannerImgIndex)
+
+    }
+
+    var intervalBanner = setInterval(() => {
+        bannerImgIndex++
+        if(bannerImgIndex > 2) bannerImgIndex = 0 
+        sl(bannerImgIndex)
+    }, 2000)
+
+    function loadBanner(z) {
+        var homeBanner = document.querySelector(".home-banner")
+        var widthBanner = homeBanner.offsetWidth
+        var bannerList = homeBanner.querySelector(".home-banner_list")
+        bannerList.style.transform = `translateX(-${z * widthBanner}px)`
+        clearInterval(intervalBanner)
+        intervalBanner = setInterval(() => {
+        bannerImgIndex++
+        if(bannerImgIndex > 2) bannerImgIndex = 0 
+        sl(bannerImgIndex)
+    }, 2000)
+    }
+
+    function removeClassAllEle(classEle, className) {
+        var listEle = document.querySelectorAll(`.${classEle}`)
+        listEle.forEach((ele) => {
+            ele.classList.remove(className)
+        })
+
+        return listEle
+    }
+
+    function sl(z) {
+        listEle = removeClassAllEle("home-banner_sl", "home-banner_sl-x")
+        bannerImgIndex = z
+        listEle[z].classList.add("home-banner_sl-x")
+        loadBanner(z)
+    }
+
+</script>
 
 </html>
