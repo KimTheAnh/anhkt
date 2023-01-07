@@ -1,6 +1,7 @@
 :root {
     --border-color: #ccc;
     --sidebar-header-color: rgb(235, 235, 235);
+    --blue-color: #1d00ee;
 }
 
 * {
@@ -91,14 +92,22 @@ main {
 .home-banner_btn:first-child {
     background: rgb(0, 0, 0);
     background: linear-gradient(90deg, rgba(0, 0, 0, 1) 0%, rgba(255, 255, 255, 0) 100%);
-
+    opacity: 0;
 }
 
 .home-banner_btn:last-child {
     background: rgb(255, 255, 255);
     background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 1) 100%);
-
+    opacity: 0;
 }
+
+.home-banner_btn:first-child:hover,
+.home-banner_btn:last-child:hover {
+    opacity: 1;
+    cursor: pointer;
+    transition: all 0.2s linear;
+}
+
 
 .home-banner_btn div {
     font-size: 30px;
@@ -132,7 +141,8 @@ main {
 
 .home-product-item {
     border: 1px solid var(--border-color);
-
+    text-decoration: none;
+    color: black;
 }
 
 .home-banner_list-sl {
@@ -231,7 +241,10 @@ main {
     row-gap: 8px;
 }
 
-.auth-form_help {}
+.auth-form_help a {
+    text-decoration: none;
+    color: var(--blue-color);
+}
 
 .danhmuc-list {
     display: grid;
@@ -291,5 +304,5 @@ main {
 }
 
 .toplike-item_name {
-    color: rgb(0, 98, 255);
+    color: var(--blue-color);
 }
