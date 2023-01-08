@@ -41,6 +41,7 @@ header {
     list-style: none;
     background-color: black;
     color: white;
+    margin-bottom: 20px;
 }
 
 .navbar-item {
@@ -65,7 +66,6 @@ header {
 }
 
 main {
-    margin-top: 20px;
 }
 
 .home-banner {
@@ -350,6 +350,8 @@ main {
     border: 1px solid var(--border-color);
     font-size: 16px;
     border-radius: 4px;
+    color: black;
+    text-decoration: none;
 }
 
 .list-loaihang-table {
