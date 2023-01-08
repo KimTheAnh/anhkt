@@ -2,6 +2,7 @@
     --border-color: #ccc;
     --sidebar-header-color: rgb(235, 235, 235);
     --blue-color: #1d00ee;
+    --header-admin-color: aquamarine;
 }
 
 * {
@@ -45,6 +46,8 @@ header {
 .navbar-item {
     line-height: 50px;
     padding: 0 20px;
+    text-decoration: none;
+    color: white;
 }
 
 .here {
@@ -303,6 +306,73 @@ main {
 
 }
 
+.admin-header {
+    background-color: var(--header-admin-color);
+    color: rgb(0, 134, 89);
+    margin-top: 12px;
+    font-size: 20px;
+    padding: 20px;
+}
+
 .toplike-item_name {
     color: var(--blue-color);
+}
+
+.form-loaihang {
+    margin-top: 12px;
+}
+
+.form-loaihang-box {
+    margin-bottom: 12px;
+}
+
+.form-loaihang-text {
+    font-weight: 600;
+}
+
+.form-loaihang-input {
+    width: 100%;
+    padding: 6px 12px;
+    margin-top: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+.form-loaihang-btns {
+    display: flex;
+    column-gap: 8px;
+}
+
+.form-loaihang-btn {
+    line-height: 16px;
+    padding: 4px 8px;
+    background-color: white;
+    border: 1px solid var(--border-color);
+    font-size: 16px;
+    border-radius: 4px;
+}
+
+.list-loaihang-table {
+    margin-top: 20px;
+    width: 100%;
+    border-spacing: 0;
+    margin-bottom: 12px;
+}
+
+.list-loaihang-table th {
+    text-align: left;
+    background-color: var(--header-admin-color);
+    line-height: 36px;
+}
+
+.list-loaihang-table td {
+    border-bottom: 1px solid var(--border-color);
+    line-height: 40px;
+}
+
+.list-loaihang-table td input {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
