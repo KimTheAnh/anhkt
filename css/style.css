@@ -354,6 +354,11 @@ main {
     text-decoration: none;
 }
 
+.form-loaihang-btn:hover {
+    background-color: red;
+    cursor: pointer;
+}
+
 .list-loaihang-table {
     margin-top: 20px;
     width: 100%;

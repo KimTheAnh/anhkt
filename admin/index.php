@@ -1,7 +1,7 @@
 <?php
     require "header.php";
     require "../model/pdo.php";
-
+    
     if(isset($_GET['act'])) {
         $act = $_GET['act'];
         switch ($act) {
@@ -44,6 +44,19 @@
                     $maloai = $_GET['id'];
                     echo $maloai;
                     $sql = "UPDATE `duanmau`.`danhmuc` SET `name` = '$tenloai' WHERE `id` = $maloai";
+                    pdo_execute($sql);
+                }
+                header("Location:index.php?act=listdanhmuc");
+                break;
+
+            case 'xoadanhmuccheck':
+                if (isset($_GET['id'])) {
+                    $_id = $_GET['id'];
+                    function id($id) {
+                        return '`id` ='.$id;
+                    };
+                    $sqlId = join(' OR ' ,array_map('id', $_id));
+                    $sql = "DELETE FROM `duanmau`.`danhmuc` WHERE $sqlId;";
                     pdo_execute($sql);
                 }
                 header("Location:index.php?act=listdanhmuc");
