@@ -15,10 +15,6 @@
                 require "danhmuc/add.php";
                 break;
 
-            case 'addsp':
-                require "sanpham/add.php";
-                break;
-
             case 'listdanhmuc':
                 $listdanhmuc = list_danhmuc();
                 require "danhmuc/list.php";
@@ -55,6 +51,35 @@
                     delete_danhmuc_check($_id);
                 }
                 header("Location:index.php?act=listdanhmuc");
+                break;
+
+            // controller sản phẩm
+
+            case 'addsp':
+                $sql = "SELECT danhmuc.`id`, danhmuc.`name` FROM danhmuc ORDER BY danhmuc.id ASC";
+                $listdanhmuc = pdo_query($sql);
+                if (isset($_POST['themmoi'])) {
+                    $sql = "SELECT sanpham.`id` FROM sanpham ORDER BY sanpham.id DESC LIMIT 1";
+                    $id = pdo_query_one($sql)['id'];
+                    $tensanpham = $_POST['tensanpham'];
+                    $giasanpham = $_POST['giasanpham'];
+                    $motasanpham = $_POST['motasanpham'];
+                    
+                    if(isset($_FILES['anhsanpham'])) {
+                        $dir = "sanpham/img/";
+                        $imgUpload = $_FILES['anhsanpham']['name'];
+                        $imgFileType = pathinfo($imgUpload,PATHINFO_EXTENSION);
+                        $imgName = ++$id.'.'.$imgFileType;
+                        $imgLink = $dir.$imgName;
+                        move_uploaded_file($_FILES['anhsanpham']['tmp_name'], $imgLink);
+                        // unlink($imgName);
+                    }
+                    $danhmucsanpham = $_POST['danhmucsanpham'];
+                    $sql = "INSERT INTO `duanmau`.`sanpham` (`name`, `price`, `img`, `mota`, `iddm`) VALUES ('$tensanpham', $giasanpham, '$motasanpham', '$imgName', $danhmucsanpham)";
+                    pdo_execute($sql);
+                    $thongbao = "Thêm thành công";
+                }
+                require "sanpham/add.php";
                 break;
 
             default:

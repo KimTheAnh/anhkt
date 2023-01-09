@@ -1,6 +1,5 @@
 <?php
     extract($dm);
-
 ?>
 
 <div class="admin-header">
@@ -22,8 +21,5 @@
         <a href="index.php?act=listdanhmuc" class="form-loaihang-btn">Danh sách</a>
     </div>
 </form>
-<?php
-// if (isset($thongbao) && $thongbao != '') echo $thongbao;
-?>
 
 </div>
