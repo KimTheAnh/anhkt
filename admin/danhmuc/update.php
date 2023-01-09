@@ -1,10 +1,6 @@
 <?php
-    if(isset($_GET['id'])&&$_GET['id']>0) {
-        $id = $_GET['id'];
-        $sql = "SELECT * FROM danhmuc WHERE danhmuc.`id`=$id";
-        $dm = pdo_query_one($sql);
-        extract($dm);
-    }
+    extract($dm);
+
 ?>
 
 <div class="admin-header">
@@ -14,7 +10,7 @@
 <form class="form-loaihang" action="index.php?act=updatedanhmuc&id=<?= $id ?>" method="POST">
     <div class="form-loaihang-box">
         <div class="form-loaihang-text">Mã loại</div>
-        <input type="text" class="form-loaihang-input" disabled placeholder="Mã tự tăng" value="<?= $id ?>">
+        <input type="text" class="form-loaihang-input" disabled value="<?= $id ?>">
     </div>
     <div class="form-loaihang-box">
         <div class="form-loaihang-text">Tên loại</div>

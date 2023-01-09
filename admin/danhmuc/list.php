@@ -45,6 +45,8 @@
 
     function danhmucUpdate(id) {
         window.location = 'index.php?act=suadanhmuc&id=' + id
+        event.stopPropagation()
+
     }
 
     function danhmucCheck(x) {
