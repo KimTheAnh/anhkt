@@ -64,6 +64,7 @@
                     $tensanpham = $_POST['tensanpham'];
                     $giasanpham = $_POST['giasanpham'];
                     $motasanpham = $_POST['motasanpham'];
+                    $danhmucsanpham = $_POST['danhmucsanpham'];
                     
                     if(isset($_FILES['anhsanpham'])) {
                         $dir = "sanpham/img/";
@@ -72,15 +73,59 @@
                         $imgName = ++$id.'.'.$imgFileType;
                         $imgLink = $dir.$imgName;
                         move_uploaded_file($_FILES['anhsanpham']['tmp_name'], $imgLink);
-                        // unlink($imgName);
                     }
-                    $danhmucsanpham = $_POST['danhmucsanpham'];
-                    $sql = "INSERT INTO `duanmau`.`sanpham` (`name`, `price`, `img`, `mota`, `iddm`) VALUES ('$tensanpham', $giasanpham, '$motasanpham', '$imgName', $danhmucsanpham)";
+                    $sql = "INSERT INTO `duanmau`.`sanpham` (`id`, `name`, `price`, `img`, `mota`, `iddm`) VALUES ($id , '$tensanpham', $giasanpham, '$imgName', '$motasanpham', $danhmucsanpham)";
                     pdo_execute($sql);
                     $thongbao = "Thêm thành công";
                 }
                 require "sanpham/add.php";
                 break;
+
+                case 'listsanpham':
+                    $sql = "SELECT sanpham.id, sanpham.`name`, sanpham.price, sanpham.img, sanpham.mota, sanpham.luotxem, danhmuc.`name` AS `namedm` FROM sanpham JOIN danhmuc ON sanpham.iddm = danhmuc.id";
+                    $listsanpham = pdo_query($sql);
+                    // print_r($listsp);
+                    require "sanpham/list.php";
+                    break;
+                
+                case 'xoasanpham':
+                    if(isset($_GET['id'])&&$_GET['id']>0) {
+                        $id = $_GET['id'];
+                        $sql = "SELECT sanpham.img FROM sanpham WHERE `id` = $id";
+                        $img = (pdo_query_one($sql)['img']);
+                        $img = 'sanpham/img/'.$img;
+                        if(unlink($img)) {
+                            $sql = "DELETE FROM `duanmau`.`sanpham` WHERE `id` = $id;";
+                            pdo_execute($sql);
+                        } 
+                    }
+                    header("Location:index.php?act=listsanpham");
+                    break;
+                
+                case 'suasanpham':
+                    if(isset($_GET['id'])&&$_GET['id']>0) {
+                        $sql = "SELECT danhmuc.`id`, danhmuc.`name` FROM danhmuc ORDER BY danhmuc.id ASC";
+                        $listdanhmuc = pdo_query($sql);
+                        $id = $_GET['id'];
+                        $sql = "SELECT sanpham.id, sanpham.`name`, sanpham.price, sanpham.img, sanpham.mota, sanpham.luotxem, sanpham.iddm FROM sanpham WHERE sanpham.id = $id";
+                        $sp = pdo_query_one($sql);
+                    }
+                    require "sanpham/update.php";
+                    break;
+
+                case 'updatesanpham':
+                    if (isset($_POST['sua']) && isset($_GET['id'])) {
+                        $masanpham = $_GET['id'];
+                        $tensanpham = $_POST['tensanpham'];
+                        $giasanpham = $_POST['giasanpham'];
+                        $motasanpham = $_POST['motasanpham'];
+                        $luotxemsanpham = $_POST['luotxemsanpham'];
+                        $danhmucsanpham = $_POST['danhmucsanpham'];
+                        $sql = "UPDATE `duanmau`.`sanpham` SET `name` = '$tensanpham', `price` = $giasanpham, `mota` = '$motasanpham', `luotxem` = $luotxemsanpham, `iddm` = $danhmucsanpham WHERE `id` = $masanpham;";
+                        pdo_execute($sql);
+                    }
+                    header("Location:index.php?act=listsanpham");
+                    break;
 
             default:
                 require "home.php";

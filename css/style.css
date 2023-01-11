@@ -322,6 +322,8 @@ main {
     margin-top: 12px;
 }
 
+
+
 .form-loaihang-box {
     margin-bottom: 12px;
 }
@@ -364,6 +366,24 @@ main {
     width: 100%;
     border-spacing: 0;
     margin-bottom: 12px;
+    
+}
+
+.list-loaihang-table .list-loaihang-table_text-center th {
+    text-align: center;
+}
+
+.list-loaihang-table_box-img {
+    display: flex;
+    justify-content: center;
+}
+
+.list-loaihang-table_img {
+    width: 30px;
+    height: 30px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .list-loaihang-table th {

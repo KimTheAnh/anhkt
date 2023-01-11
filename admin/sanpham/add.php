@@ -2,6 +2,10 @@
             THÊM MỚI SẢN PHẨM
         </div>
 
+        <?php
+            if(isset($thongbao)&&$thongbao!='') echo $thongbao;
+        ?>
+
         <form class="form-loaihang" action="index.php?act=addsp" method="POST" enctype="multipart/form-data">
             <div class="form-loaihang-box">
                 <div class="form-loaihang-text">Mã sản phẩm</div>
@@ -13,7 +17,7 @@
             </div>
             <div class="form-loaihang-box">
                 <div class="form-loaihang-text">Giá sản phẩm</div>
-                <input type="number" name="giasanpham" class="form-loaihang-input">
+                <input type="number" name="giasanpham" class="form-loaihang-input" min="0" >
             </div>
             <div class="form-loaihang-box">
                 <div class="form-loaihang-text">Ảnh sản phẩm</div>
@@ -38,8 +42,6 @@
                 <a href="index.php?act=listsanpham" class="form-loaihang-btn">Danh sách</a>
             </div>
         </form>
-        <?php
-            if(isset($thongbao)&&$thongbao!='') echo $thongbao;
-        ?>
+        
 
     </div>
