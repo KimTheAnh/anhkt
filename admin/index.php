@@ -2,6 +2,7 @@
     require "header.php";
     require "../model/pdo.php";
     require "../model/danhmuc.php";
+    require "../model/sanpham.php";
     
     if(isset($_GET['act'])) {
         $act = $_GET['act'];
@@ -56,8 +57,7 @@
             // controller sản phẩm
 
             case 'addsp':
-                $sql = "SELECT danhmuc.`id`, danhmuc.`name` FROM danhmuc ORDER BY danhmuc.id ASC";
-                $listdanhmuc = pdo_query($sql);
+                $listdanhmuc = get_listdanhmuc();
                 if (isset($_POST['themmoi'])) {
                     $sql = "SELECT sanpham.`id` FROM sanpham ORDER BY sanpham.id DESC LIMIT 1";
                     $id = pdo_query_one($sql)['id'];
@@ -74,41 +74,34 @@
                         $imgLink = $dir.$imgName;
                         move_uploaded_file($_FILES['anhsanpham']['tmp_name'], $imgLink);
                     }
-                    $sql = "INSERT INTO `duanmau`.`sanpham` (`id`, `name`, `price`, `img`, `mota`, `iddm`) VALUES ($id , '$tensanpham', $giasanpham, '$imgName', '$motasanpham', $danhmucsanpham)";
-                    pdo_execute($sql);
+                    add_sanpham($id, $tensanpham, $giasanpham, $imgName, $motasanpham, $danhmucsanpham);
                     $thongbao = "Thêm thành công";
                 }
                 require "sanpham/add.php";
                 break;
 
                 case 'listsanpham':
-                    $sql = "SELECT sanpham.id, sanpham.`name`, sanpham.price, sanpham.img, sanpham.mota, sanpham.luotxem, danhmuc.`name` AS `namedm` FROM sanpham JOIN danhmuc ON sanpham.iddm = danhmuc.id";
-                    $listsanpham = pdo_query($sql);
-                    // print_r($listsp);
+                    $listsanpham = list_sanpham();
                     require "sanpham/list.php";
                     break;
                 
                 case 'xoasanpham':
                     if(isset($_GET['id'])&&$_GET['id']>0) {
                         $id = $_GET['id'];
-                        $sql = "SELECT sanpham.img FROM sanpham WHERE `id` = $id";
-                        $img = (pdo_query_one($sql)['img']);
+                        $img = get_img_sanpham($id);
                         $img = 'sanpham/img/'.$img;
                         if(unlink($img)) {
-                            $sql = "DELETE FROM `duanmau`.`sanpham` WHERE `id` = $id;";
-                            pdo_execute($sql);
-                        } 
+                            delete_sanpham($id);
+                        }
                     }
                     header("Location:index.php?act=listsanpham");
                     break;
                 
                 case 'suasanpham':
                     if(isset($_GET['id'])&&$_GET['id']>0) {
-                        $sql = "SELECT danhmuc.`id`, danhmuc.`name` FROM danhmuc ORDER BY danhmuc.id ASC";
-                        $listdanhmuc = pdo_query($sql);
+                        $listdanhmuc = get_listdanhmuc();
                         $id = $_GET['id'];
-                        $sql = "SELECT sanpham.id, sanpham.`name`, sanpham.price, sanpham.img, sanpham.mota, sanpham.luotxem, sanpham.iddm FROM sanpham WHERE sanpham.id = $id";
-                        $sp = pdo_query_one($sql);
+                        $sp = load_sanpham($id);
                     }
                     require "sanpham/update.php";
                     break;
@@ -121,8 +114,15 @@
                         $motasanpham = $_POST['motasanpham'];
                         $luotxemsanpham = $_POST['luotxemsanpham'];
                         $danhmucsanpham = $_POST['danhmucsanpham'];
-                        $sql = "UPDATE `duanmau`.`sanpham` SET `name` = '$tensanpham', `price` = $giasanpham, `mota` = '$motasanpham', `luotxem` = $luotxemsanpham, `iddm` = $danhmucsanpham WHERE `id` = $masanpham;";
-                        pdo_execute($sql);
+                        update_sanpham($masanpham , $tensanpham, $giasanpham, $motasanpham, $luotxemsanpham, $danhmucsanpham);
+                    }
+                    header("Location:index.php?act=listsanpham");
+                    break;
+
+                case 'xoasanphamcheck':
+                    if (isset($_GET['id'])) {
+                        $_id = $_GET['id'];
+                        delete_sanpham_check($_id);
                     }
                     header("Location:index.php?act=listsanpham");
                     break;
