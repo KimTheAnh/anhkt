@@ -12,6 +12,12 @@ function list_danhmuc()
     return $listdanhmuc;
 }
 
+function list_danhmuc_home($st, $ed) {
+    $sql = "SELECT danhmuc.`id`, danhmuc.`name` FROM danhmuc ORDER BY danhmuc.id ASC LIMIT $st, $ed";
+    $listdanhmuc = pdo_query($sql);
+    return $listdanhmuc;
+}
+
 function delete_danhmuc($id)
 {
     $sql = "DELETE FROM `duanmau`.`danhmuc` WHERE `id` = $id;";
