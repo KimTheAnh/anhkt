@@ -32,7 +32,7 @@
             <?php endforeach; ?>
         </div>
         <div class="timkiem-input">
-            <input type="text" placeholder="Từ khoá tìm kiếm">
+            <input type="text" onkeypress="timkiemsp(event, this)" oninput="loadtimkiemsp(this)" placeholder="Từ khoá tìm kiếm">
         </div>
     </div>
 
@@ -41,7 +41,7 @@
         <div class="toplike-list">
             <?php foreach ($spluotxem as $sp) : ?>
                 <?php extract($sp) ?>
-                <a href="" class="toplike-item">
+                <a href="index.php?act=spchitiet&id=<?= $id ?>" class="toplike-item">
                     <div class="toplike-item_img" style="background-image: url(<?= $imgdir . $img ?>);">
                     </div>
                     <div class="toplike-item_name"><?= $name ?></div>
@@ -50,3 +50,17 @@
         </div>
     </div>
 </div>
+<script>
+    function timkiemsp(e, x) {
+        if (e.keyCode == 13) {
+            var kyw = x.value.trim()
+            if(kyw != "") {
+                window.location = "index.php?act=timkiem&kyw=" + kyw
+            }
+        }
+    }
+
+    function loadtimkiemsp(x) {
+        // console.log(x.value)
+    }
+</script>

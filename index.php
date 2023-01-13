@@ -22,11 +22,24 @@
                 break;
 
             case 'spchitiet':
+                $id = $_GET['id'];
+                $sp = load_sanpham($id);
+                extract($sp);
+                $listsp = get_listsanpham_loai($id, $iddm);
                 require "view/spchitiet.php";
                 break;
 
+            case 'timkiem':
+                $kyw = $_GET['kyw'];
+                $listsp = get_listsanpham_name($kyw);
+                $thongbao = "";
+                if(empty($listsp)) {
+                    $thongbao = "Không có sản phẩm nào phù hợp";
+                }
+                require "view/timkiem.php";
+                break;
+
             default:
-                require "view/navbar.php";
                 require "view/home.php";
                 break;
         } 

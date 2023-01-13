@@ -71,3 +71,15 @@ function load_sanpham($id)
     $sp = pdo_query_one($sql);
     return $sp;
 }
+
+function get_listsanpham_loai($id ,$iddanhmuc) {
+    $sql = "SELECT sanpham.id, sanpham.`name` FROM sanpham WHERE sanpham.iddm = $iddanhmuc AND sanpham.id != $id";
+    $listsp = pdo_query($sql);
+    return $listsp;
+}
+
+function get_listsanpham_name($kyw) {
+    $sql = "SELECT * FROM sanpham WHERE sanpham.`name` LIKE '%$kyw%'";
+    $listsp = pdo_query($sql);
+    return $listsp;
+}
