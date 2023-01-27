@@ -18,7 +18,7 @@
 
             <ul class="auth-form-list_help">
                 <li class="auth-form_help"><a href="">Quên mật khẩu</a></li>
-                <li class="auth-form_help"><a href="">Đăng ký thành viên</a></li>
+                <li class="auth-form_help"><a href="index.php?act=dangky">Đăng ký thành viên</a></li>
             </ul>
         </form>
     </div>

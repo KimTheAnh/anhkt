@@ -2,6 +2,7 @@
     require "model/pdo.php";
     require "model/sanpham.php";
     require "model/danhmuc.php";
+    require "model/taikhoan.php";
     require "global.php";
     require "view/header.php";
     
@@ -37,6 +38,27 @@
                     $thongbao = "Không có sản phẩm nào phù hợp";
                 }
                 require "view/timkiem.php";
+                break;
+
+            case 'dangky':
+                if(isset($_POST['dangky'])) {
+                    $listthongbao = [];
+                    
+                    $user = $_POST['user'];
+                    $email = $_POST['email'];
+                    $pass = $_POST['pass'];
+                    $repass = $_POST['repass'];
+                    if($pass != $repass) {
+                        $listthongbao[] = "Mật khẩu nhập lại không chính xác";
+                    }
+
+                    if(empty($listthongbao)) {
+                        $sql = "INSERT INTO `duanmau`.`taikhoan` (`user`, `pass`, `email`, `address`, `tel`) VALUES ('$user', $pass, '$email', '', '')";
+                        pdo_execute($sql);
+                        $listthongbao[] = "Đăng ký thành công";
+                    }
+                }
+                require ("view/dangky.php");
                 break;
 
             default:

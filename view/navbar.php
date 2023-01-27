@@ -1,3 +1,33 @@
+<?php 
+    $listNavbar = array(
+        [
+            'link' => "index.php?",
+            'name' => "Trang chủ",
+            'actLink' => "",
+        ],
+        [
+            'link' => "index.php?",
+            'name' => "Giới thiệu",
+            'actLink' => "act=gioithieu",
+        ],
+        [
+            'link' => "index.php?",
+            'name' => "Liên hệ",
+            'actLink' => 'act=lienhe',
+        ],
+        [
+            'link' => "index.php?",
+            'name' => "Góp ý",
+            'actLink' => 'act=gopy',
+        ],
+        [
+            'link' => "index.php?",
+            'name' => "Hỏi đáp",
+            'actLink' => 'act=hoidap',
+        ],
+      );
+?>
+
 <nav>
     <ul class="navbar-list">
         <?php foreach ($listNavbar as $nb) : ?>
