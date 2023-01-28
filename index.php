@@ -1,4 +1,6 @@
 <?php
+    session_start();
+    // session_destroy();
     require "model/pdo.php";
     require "model/sanpham.php";
     require "model/danhmuc.php";
@@ -58,7 +60,53 @@
                         $listthongbao[] = "Đăng ký thành công";
                     }
                 }
-                require ("view/dangky.php");
+                require "view/dangky.php";
+
+            case 'dangnhap':
+                if(isset($_POST['dangnhap'])) {
+                    $thongbao = "";
+                    $user = $_POST['user'];
+                    $pass = $_POST['pass'];
+                    $tk = get_user($user, $pass);
+
+                    if(empty($tk)) {
+                        $thongbao = "Tên đang nhập hoặc mật khẩu của bạn không đúng!";
+                    } else {
+                        $_SESSION['user'] = $tk;
+                        $thongbao = "Đăng nhập thành công";
+                    }
+                    // dd($thongbao);
+                    header("Location: index.php");
+                }
+                break;
+
+            case 'capnhattk':
+                if(isset($_POST['capnhat'])) {
+                    $listthongbao = [];
+                    $id = $_POST['id'];
+                    $user = $_POST['user'];
+                    $email = $_POST['email'];
+                    $pass = $_POST['pass'];
+                    $repass = $_POST['repass'];
+                    $tel = $_POST['tel'];
+                    $address = $_POST['address'];
+                    if($pass != $repass) {
+                        $listthongbao[] = "Mật khẩu nhập lại không chính xác";
+                    }
+
+                    if(empty($listthongbao)) {
+                        $sql = "UPDATE `duanmau`.`taikhoan` SET `user` = '$user', `pass` = '$pass', `email` = '$email', `address` = '$address', `tel` = '$tel' WHERE `id` = $id;";
+                        pdo_execute($sql);
+                        $listthongbao[] = "Cập nhật thành công";
+                        $_SESSION['user'] = get_all_info_user($id);
+                    }
+                }
+                require "view/capnhattk.php";
+                break;
+
+            case 'thoat':
+                session_unset();
+                header("Location: index.php");
                 break;
 
             default:

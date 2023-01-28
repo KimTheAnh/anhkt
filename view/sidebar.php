@@ -1,27 +1,52 @@
 <div class="sidebar">
-    <div class="sidebar-item">
-        <div class="sidebar_header">
-            TÀI KHOẢN
-        </div>
-        <form class="auth-form" action="" method="post">
-            <div class="auth-form_box">
-                <div class="auth-form_text">Tên đăng nhập</div>
-                <input type="text" class="auth-form_input">
-            </div>
-            <div class="auth-form_box">
-                <div class="auth-form_text">Mật khẩu</div>
-                <input type="password" class="auth-form_input" value="" name="password">
-            </div>
-            <input type="checkbox" class="auth-form_save" name="" id="">
-            <div class="auth-form_savetext">Ghi nhớ tải khoản ?</div>
-            <input type="submit" class="auth-form_btn" value="Đăng nhập">
+    <?php
+    if (isset($_SESSION['user']) && !empty($_SESSION['user'])) {
+        extract($_SESSION['user']);
+    ?>
 
+        <div class="sidebar-item" style="padding-bottom: 20px;">
+            <div class="sidebar_header">
+                TÀI KHOẢN
+            </div>
+            <h2 style="padding: 0 20px 10px;">Xin chào</h2>
+            <p style="padding: 0 20px;"><?= $user ?></p>
             <ul class="auth-form-list_help">
-                <li class="auth-form_help"><a href="">Quên mật khẩu</a></li>
-                <li class="auth-form_help"><a href="index.php?act=dangky">Đăng ký thành viên</a></li>
+                <li class="auth-form_help"><a href="index.php?act=capnhattk">Cập nhật tài khoản</a></li>
+                <li class="auth-form_help"><a href="admin/index.php">Đăng nhập Admin</a></li>
+                <li class="auth-form_help"><a href="index.php?act=thoat">Thoát</a></li>
             </ul>
-        </form>
-    </div>
+        </div>
+
+    <?php } else {
+    ?>
+        <div class="sidebar-item">
+            <div class="sidebar_header">
+                TÀI KHOẢN
+            </div>
+            <form class="auth-form" action="index.php?act=dangnhap" method="post">
+                <div class="auth-form_box">
+                    <div class="auth-form_text">Tên đăng nhập</div>
+                    <input type="text" class="auth-form_input" name="user">
+                </div>
+                <div class="auth-form_box">
+                    <div class="auth-form_text">Mật khẩu</div>
+                    <input type="password" class="auth-form_input" value="" name="pass">
+                </div>
+                <input type="checkbox" class="auth-form_save" id="">
+                <div class="auth-form_savetext">Ghi nhớ tải khoản ?</div>
+                <input type="submit" class="auth-form_btn" value="Đăng nhập" name="dangnhap">
+
+                <ul class="auth-form-list_help">
+                    <li class="auth-form_help"><a href="">Quên mật khẩu</a></li>
+                    <li class="auth-form_help"><a href="index.php?act=dangky">Đăng ký thành viên</a></li>
+                </ul>
+            </form>
+        </div>
+
+    <?php } ?>
+
+
+
 
     <div class="sidebar-item">
         <div class="sidebar_header">DANH MỤC</div>
@@ -54,7 +79,7 @@
     function timkiemsp(e, x) {
         if (e.keyCode == 13) {
             var kyw = x.value.trim()
-            if(kyw != "") {
+            if (kyw != "") {
                 window.location = "index.php?act=timkiem&kyw=" + kyw
             }
         }

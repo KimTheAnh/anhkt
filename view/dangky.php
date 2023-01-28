@@ -2,13 +2,16 @@
     <?php
     if (isset($listthongbao)) {
         foreach ($listthongbao as $thongbao) {
-            echo "<p>$thongbao</p>";
+            echo '<p style="color: red">' . $thongbao . '</p>';
         }
         // dd($listthongbao);
     }
     ?>
     <div class="row column-3-1">
         <div class="content">
+            <div class="admin-header" style="margin-top: 0;">
+                Đăng ký tài khoản
+            </div>
             <form class="form-loaihang" action="index.php?act=dangky" method="POST">
                 <div class="form-loaihang-box">
                     <div class="form-loaihang-text">Email</div>
