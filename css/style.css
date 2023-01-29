@@ -206,6 +206,7 @@ main {
     border: 1px solid var(--border-color);
     margin-bottom: 20px;
     border-radius: 4px;
+    height: fit-content;
 }
 
 .auth-form {
@@ -493,4 +494,8 @@ main {
     padding: 0 20px;
     border-radius: 4px 4px 0 0 ;
     margin-bottom: 12px;
+}
+
+.form-content {
+    padding: 0 20px 20px;
 }

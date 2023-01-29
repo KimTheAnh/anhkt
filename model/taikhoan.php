@@ -13,10 +13,37 @@ function get_user($user, $pass)
     return $tk;
 }
 
-function get_all_info_user($id) 
+function update_user($id, $user, $pass, $email, $address, $tel)
+{
+    $sql = "UPDATE `duanmau`.`taikhoan` SET `user` = '$user', `pass` = '$pass', `email` = '$email', `address` = '$address', `tel` = '$tel' WHERE `id` = $id;";
+    pdo_execute($sql);
+}
+
+function update_pass($id, $pass) 
+{
+    $sql = "UPDATE `duanmau`.`taikhoan` SET `pass` = '$pass' WHERE `id` = $id;";
+    pdo_execute($sql);
+}
+
+function get_id_user_reset_pass($user, $email)
+{
+    $sql = "SELECT taikhoan.id FROM taikhoan WHERE user = '$user' AND email = '$email'";
+    $id = pdo_query_one($sql);
+
+    return $id;
+}
+
+function get_all_info_user($id)
 {
     $sql = "SELECT * FROM taikhoan WHERE id = $id";
     $tk = pdo_query_one($sql);
-    
+
     return $tk;
+}
+
+function get_listtk() {
+    $sql = "SELECT * FROM taikhoan";
+    $listtk = pdo_query($sql);
+
+    return $listtk;
 }

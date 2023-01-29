@@ -20,13 +20,4 @@
         <header>
             QUẢN TRỊ WEBSITE
         </header>
-        <nav>
-            <ul class="navbar-list">
-                <a href="index.php" class="navbar-item here">Trang chủ</a>
-                <a href="index.php?act=adddm" class="navbar-item">Loại hàng</a>
-                <a href="index.php?act=addsp" class="navbar-item">Hàng hoá</a>
-                <a href="" class="navbar-item">Khách hàng</a>
-                <a href="" class="navbar-item">Bình luận</a>
-                <a href="" class="navbar-item">Thống kê</a>
-            </ul>
-        </nav>
+        

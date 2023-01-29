@@ -1,6 +1,5 @@
 <?php
     session_start();
-    // session_destroy();
     require "model/pdo.php";
     require "model/sanpham.php";
     require "model/danhmuc.php";
@@ -95,13 +94,45 @@
                     }
 
                     if(empty($listthongbao)) {
-                        $sql = "UPDATE `duanmau`.`taikhoan` SET `user` = '$user', `pass` = '$pass', `email` = '$email', `address` = '$address', `tel` = '$tel' WHERE `id` = $id;";
-                        pdo_execute($sql);
+                        update_user($id, $user, $pass, $email, $address, $tel);
                         $listthongbao[] = "Cập nhật thành công";
                         $_SESSION['user'] = get_all_info_user($id);
                     }
                 }
                 require "view/capnhattk.php";
+                break;
+
+            case 'quenmk':
+                if(isset($_POST['gui'])) {
+                    $listthongbao = [];
+                    $user = $_POST['user'];
+                    $email = $_POST['email'];
+                    $tk = get_id_user_reset_pass($user, $email);
+
+                    if(empty($tk)) {
+                        $listthongbao[] = "Dữu liệu không chính xác vui lòng nhập lại";
+                    } else {
+                        header("Location: index.php?act=resetmk&id=" . $tk['id']);
+                    }
+                }
+                require "view/quenmk.php";
+                break;
+
+            case 'resetmk':
+                $id = $_GET['id'];
+                if(isset($_POST['gui'])) {
+                    $listthongbao = [];
+                    $pass = $_POST['pass'];
+                    $repass = $_POST['repass'];
+
+                    if($pass != $repass) {
+                        $listthongbao[] = "Vui lòng nhập mật khẩu trùng khớp";
+                    } else {
+                        update_pass($id,$pass);
+                        header("Location: index.php");
+                    }
+                }
+                require "view/resetmk.php";
                 break;
 
             case 'thoat':
@@ -118,6 +149,5 @@
         require "view/home.php";
     }
 
-    
     require "view/footer.php";
 ?>

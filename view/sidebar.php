@@ -12,7 +12,9 @@
             <p style="padding: 0 20px;"><?= $user ?></p>
             <ul class="auth-form-list_help">
                 <li class="auth-form_help"><a href="index.php?act=capnhattk">Cập nhật tài khoản</a></li>
+                <?php if($role == 1){ ?>
                 <li class="auth-form_help"><a href="admin/index.php">Đăng nhập Admin</a></li>
+                <?php }?>
                 <li class="auth-form_help"><a href="index.php?act=thoat">Thoát</a></li>
             </ul>
         </div>
@@ -37,7 +39,7 @@
                 <input type="submit" class="auth-form_btn" value="Đăng nhập" name="dangnhap">
 
                 <ul class="auth-form-list_help">
-                    <li class="auth-form_help"><a href="">Quên mật khẩu</a></li>
+                    <li class="auth-form_help"><a href="index.php?act=quenmk">Quên mật khẩu</a></li>
                     <li class="auth-form_help"><a href="index.php?act=dangky">Đăng ký thành viên</a></li>
                 </ul>
             </form>

@@ -3,9 +3,11 @@
     require "../model/pdo.php";
     require "../model/danhmuc.php";
     require "../model/sanpham.php";
+    require "../model/taikhoan.php";
     
     if(isset($_GET['act'])) {
         $act = $_GET['act'];
+        require "navbar.php";
         switch ($act) {
             case 'adddm':
                 if (isset($_POST['themmoi'])) {
@@ -127,11 +129,17 @@
                     header("Location:index.php?act=listsanpham");
                     break;
 
+                case 'dskh':
+                    $listtk = get_listtk();
+                    require "taikhoan/list.php";
+                    break;
+
             default:
                 require "home.php";
                 break;
         }
     } else {
+        require "navbar.php";
         require "home.php";
     }
 
