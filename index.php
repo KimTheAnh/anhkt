@@ -59,7 +59,7 @@
                         $listthongbao[] = "Đăng ký thành công";
                     }
                 }
-                require "view/dangky.php";
+            require "view/taikhoan/dangky.php";
 
             case 'dangnhap':
                 if(isset($_POST['dangnhap'])) {
@@ -99,7 +99,7 @@
                         $_SESSION['user'] = get_all_info_user($id);
                     }
                 }
-                require "view/capnhattk.php";
+                require "view/taikhoan/capnhattk.php";
                 break;
 
             case 'quenmk':
@@ -115,7 +115,7 @@
                         header("Location: index.php?act=resetmk&id=" . $tk['id']);
                     }
                 }
-                require "view/quenmk.php";
+                require "view/taikhoan/quenmk.php";
                 break;
 
             case 'resetmk':
@@ -132,7 +132,7 @@
                         header("Location: index.php");
                     }
                 }
-                require "view/resetmk.php";
+                require "view/taikhoan/resetmk.php";
                 break;
 
             case 'thoat':
