@@ -134,6 +134,10 @@
                 }
                 require "view/taikhoan/resetmk.php";
                 break;
+            
+            case 'giohang':
+                include "view/giohang/giohang.php";
+                break;
 
             case 'thoat':
                 session_unset();
@@ -150,4 +154,3 @@
     }
 
     require "view/footer.php";
-?>

@@ -4,6 +4,7 @@
     require "../model/danhmuc.php";
     require "../model/sanpham.php";
     require "../model/taikhoan.php";
+    require "../model/binhluan.php";
     
     if(isset($_GET['act'])) {
         $act = $_GET['act'];
@@ -134,6 +135,51 @@
                     require "taikhoan/list.php";
                     break;
 
+                case 'xoakhachhang':
+                    $id = $_GET['id'];
+                    delete_khachhang($id);
+                    header("Location: index.php?act=dskh");
+                    require "binhluan/list.php";
+                    break;
+                
+                case 'xoakhachhangcheck':
+                    if (isset($_GET['id'])) {
+                        $_id = $_GET['id'];
+                        delete_khachhang_check($_id);
+                    }
+                    header("Location:index.php?act=dskh");
+                    break;
+
+                case 'listbinhluan':
+                    $listbinhluan = get_list_binhluan();
+                    require "binhluan/list.php";
+                    break;
+
+                case 'xoabinhluan':
+                    $id = $_GET['id'];
+                    delete_binhluan($id);
+                    header("Location: index.php?act=listbinhluan");
+                    require "binhluan/list.php";
+                    break;
+                
+                case 'xoabinhluancheck':
+                    if (isset($_GET['id'])) {
+                        $_id = $_GET['id'];
+                        delete_binhluan_check($_id);
+                    }
+                    header("Location:index.php?act=listbinhluan");
+                    break;
+                
+                
+                case 'updaterole':
+                    if (isset($_GET['id'])) {
+                        $id = $_GET['id'];
+                        $role = $_GET['role'];
+                        update_role($id, $role);
+                    }
+                    header("Location:index.php?act=dskh");
+                    break;
+                
             default:
                 require "home.php";
                 break;

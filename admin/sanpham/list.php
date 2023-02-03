@@ -1,3 +1,4 @@
+<main>
 <div class="admin-header">
     QUẢN LÝ LOẠI HÀNG
 </div>
@@ -110,3 +111,4 @@
         return _id
     }
 </script>
+</main>

@@ -19,7 +19,7 @@ function update_user($id, $user, $pass, $email, $address, $tel)
     pdo_execute($sql);
 }
 
-function update_pass($id, $pass) 
+function update_pass($id, $pass)
 {
     $sql = "UPDATE `duanmau`.`taikhoan` SET `pass` = '$pass' WHERE `id` = $id;";
     pdo_execute($sql);
@@ -41,9 +41,32 @@ function get_all_info_user($id)
     return $tk;
 }
 
-function get_listtk() {
+function get_listtk()
+{
     $sql = "SELECT * FROM taikhoan";
     $listtk = pdo_query($sql);
 
     return $listtk;
+}
+
+
+function delete_khachhang($id)
+{
+    $sql = "DELETE FROM `duanmau`.`taikhoan` WHERE `id` = $id;";
+    pdo_execute($sql);
+}
+
+function delete_khachhang_check($_id)
+{
+    $sqlId = join(' OR ', array_map(function ($id) {
+        return '`id` =' . $id;
+    }, $_id));
+
+    $sql = "DELETE FROM `duanmau`.`taikhoan` WHERE $sqlId;";
+    pdo_execute($sql);
+}
+
+function update_role($id, $role) {
+    $sql = "UPDATE `duanmau`.`taikhoan` SET `role` = '$role' WHERE `id` = $id;";
+    pdo_execute($sql);
 }

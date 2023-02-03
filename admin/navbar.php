@@ -24,7 +24,7 @@
         [
             'link' => "index.php?",
             'name' => "Bình luận",
-            'actLink' => 'act=binhluan',
+            'actLink' => 'act=listbinhluan',
         ],
         [
             'link' => "index.php?",
