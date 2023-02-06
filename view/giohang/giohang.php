@@ -1,8 +1,9 @@
+<?php $stt = 0 ?>
 <main>
     <div class="row column-3-1">
         <div class="content">
             <div class="box-sanphamct" style="margin-top: 0;">
-                <div class="box-sanphamct_header" >
+                <div class="box-sanphamct_header">
                     Giỏ hàng
                 </div>
                 <div class="box-giohang">
@@ -18,24 +19,30 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>
-                                    <div class="flex-center">
-                                        <div class="table-giohang_img" style="background-image: url(https://images.pexels.com/photos/54300/pexels-photo-54300.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500);"></div>
-                                    </div>
-                                </td>
-                                <td>aaaa</td>
-                                <td>2</td>
-                                <td>122222</td>
-                                <td>
-                                    <div class="form-loaihang-btns">
-                                        <div class="form-loaihang-btn" onclick="Delete(<?= $id ?>)">Xoá</div>
-                                    </div>
-                                </td>
-                            </tr>
+                            <?php foreach ($listsp as $sp) : ?>
+                                <?php extract($sp) ?>
+                                <tr>
+                                    <td><?= ++$stt ?></td>
+                                    <td>
+                                        <div class="flex-center">
+                                            <div class="table-giohang_img" style="background-image: url(<?= $imgdir . $img ?>);"></div>
+                                        </div>
+                                    </td>
+                                    <td><?= $name ?></td>
+                                    <td><?= $quantity ?></td>
+                                    <td><?= $price * $quantity ?> VNĐ</td>
+                                    <td>
+                                        <div class="form-loaihang-btns">
+                                            <div class="form-loaihang-btn" onclick="Delete(<?= $id ?>)">Xoá</div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
+                    <div class="form-loaihang-btns">
+                        <a href="index.php?act=bill" class="form-loaihang-btn" style="margin-top: 20px;"  >Đặt hàng</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -48,61 +55,7 @@
 <script>
     function Delete(id) {
         var submit = confirm("Bạn có muốn xoá danh mục này ?")
-        if (submit) window.location = 'index.php?act=xoakhachhang&id=' + id
+        if (submit) window.location = 'index.php?act=deletegiohang&id=' + id
         event.stopPropagation()
-    }
-
-    function Update(id) {
-        window.location = 'index.php?act=suakhachhang&id=' + id
-        event.stopPropagation()
-    }
-
-    function Check(x) {
-        var checkBox = x.querySelector("input")
-        if (checkBox.checked) {
-            checkBox.checked = false
-        } else {
-            checkBox.checked = true
-        }
-    }
-
-    function CheckAll() {
-        var rows = document.querySelector("tbody").querySelectorAll("tr")
-        rows.forEach((row) => {
-            var checkBox = row.querySelector("td").querySelector("input")
-            checkBox.checked = true
-        })
-    }
-
-    function UnCheckAll() {
-        var rows = document.querySelector("tbody").querySelectorAll("tr")
-        rows.forEach((row) => {
-            var checkBox = row.querySelector("td").querySelector("input")
-            checkBox.checked = false
-        })
-    }
-
-    function DeleteCheck() {
-        if (confirm("Bạn có muốn xoá các mục đã chọn ?")) {
-            var _id = getIdCheck()
-            var idQry = _id.map(function(el, idx) {
-                return 'id[' + idx + ']=' + el;
-            }).join('&');
-            window.location = 'index.php?act=xoakhachhangcheck&' + idQry;
-        }
-    }
-
-    function getIdCheck() {
-        var _id = []
-        var rows = document.querySelector("tbody").querySelectorAll("tr")
-        rows.forEach((row) => {
-            var checkBox = row.querySelector("td").querySelector("input")
-            if (checkBox.checked) {
-                var id = Number(row.firstElementChild.nextElementSibling.innerHTML)
-                _id.push(id)
-            }
-        })
-
-        return _id
     }
 </script>

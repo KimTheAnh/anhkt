@@ -6,7 +6,10 @@
     require "model/taikhoan.php";
     require "global.php";
     require "view/header.php";
-    
+    if(!isset($_SESSION['cart'])) {
+        $_SESSION['cart'] = [];
+    }
+    // unset($_SESSION['cart']);
     $listdanhmuc = list_danhmuc_home(0,9);
     $spnew = get_listsanpham_home(0,9);
     $spluotxem = get_sanpham_luotxem(0, 9);
@@ -75,7 +78,8 @@
                         $thongbao = "Đăng nhập thành công";
                     }
                     // dd($thongbao);
-                    header("Location: index.php");
+                    // header("Location: index.php");
+                    header("Location:" . $_SERVER['HTTP_REFERER']);
                 }
                 break;
 
@@ -136,12 +140,79 @@
                 break;
             
             case 'giohang':
+                $listsp = $_SESSION['cart'];
+                // dd($listsp);
                 include "view/giohang/giohang.php";
+                
+                break;
+            
+            
+            case 'addgiohang':
+                if($_POST['idpro']) {
+                    $id = $_POST['idpro'];
+                    $quantity = $_POST['quantity'];
+                    $add = 1;
+                    foreach($_SESSION['cart'] as $index => $value) {
+                        if($value['id'] == $id) {
+                            $_SESSION['cart'][$index]['quantity'] += $quantity;
+                            $add = 0;
+                        }
+                    }
+
+                    if($add == 1) {
+                        $sp = load_sanpham($id);
+                        if(!empty($sp)) {
+                            extract($sp);
+                            $sp = [
+                                'id' => $id,
+                                'name' => $name,
+                                'price' => $price,
+                                'img' => $img,
+                                'quantity' => $quantity,
+                            ];
+                            $_SESSION['cart'][] = $sp;
+                        }
+                    } else {
+                        echo "Sản phẩm đã có";
+                    }
+                    dd($_SESSION['cart']);
+
+                }
+                break;
+            
+            
+            case 'deletegiohang':
+                if($_GET['id']) {
+                    $id = $_GET['id'];
+                    foreach($_SESSION['cart'] as $index => $value) {
+                        if($value['id'] == $id) {
+                            unset($_SESSION['cart'][$index]);
+                        }
+                    }
+                }
+                header("Location:" . $_SERVER['HTTP_REFERER']);
+                break;
+            
+            case 'bill':
+                $listsp = $_SESSION['cart'];
+                if(isset($_SESSION['user'])) {
+                    $info = $_SESSION['user'];
+                    extract($info);
+                }
+                if(isset($_POST['submit'])) {
+                    header("Location: index.php?act=billcomfirm");
+                }
+
+                include "view/bill/bill.php";
+                break;
+            
+            case 'billcomfirm':
+                include "view/bill/billcomfirm.php";
                 break;
 
             case 'thoat':
                 session_unset();
-                header("Location: index.php");
+                header("Location:" . $_SERVER['HTTP_REFERER']);
                 break;
 
             default:

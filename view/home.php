@@ -77,12 +77,12 @@
             <div class="home-product-list">
                 <?php foreach ($spnew as $sp) : ?>
                     <?php extract($sp) ?>
-                    <a href="index.php?act=spchitiet&id=<?= $id ?>" class="home-product-item">
+                    <div class="home-product-item" onclick="linksp(<?= $id ?>)">
                         <div class="home-product-item_img" style="background-image: url(<?= $imgdir . $img ?>);">
                         </div>
                         <div class="home-product-item_price">$ <?= $price ?></div>
                         <div class="home-product-item_name"><?= $name ?></div>
-                    </a>
+                    </div>
                 <?php endforeach; ?>
 
             </div>
@@ -92,3 +92,8 @@
         ?>
     </div>
 </main>
+<script>
+    function linksp(id) {
+        window.location = 'index.php?act=spchitiet&id=' + id
+    }
+</script>
