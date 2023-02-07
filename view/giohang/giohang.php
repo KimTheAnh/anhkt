@@ -41,7 +41,7 @@
                         </tbody>
                     </table>
                     <div class="form-loaihang-btns">
-                        <a href="index.php?act=bill" class="form-loaihang-btn" style="margin-top: 20px;"  >Đặt hàng</a>
+                        <div href="" class="form-loaihang-btn" style="margin-top: 20px;" onclick="let_bill()"  >Đặt hàng</div>
                     </div>
                 </div>
             </div>
@@ -57,5 +57,19 @@
         var submit = confirm("Bạn có muốn xoá danh mục này ?")
         if (submit) window.location = 'index.php?act=deletegiohang&id=' + id
         event.stopPropagation()
+    }
+
+    function let_bill() {
+        var item = document.querySelector('tbody').querySelector('tr')
+        if(item) {
+            window.location = 'index.php?act=bill'
+        } else {
+            toast({
+                title: "Thất bại!",
+                message: "Phải có sản phẩm mới có thể đặt hàng",
+                type: "error",
+                duration: 5000
+            });
+        }
     }
 </script>

@@ -1,3 +1,8 @@
+<?php 
+    $stt = 0 ;
+    $tong = 0;
+?>
+
 <main>
     <div class="row column-3-1">
         <div class="content">
@@ -16,7 +21,7 @@
                     Mã đơn hàng
                 </div>
                 <h3 class="flex-center height-80px" >
-                    Cảm ơn quý khác đã đặt hàng
+                    <?= $idDonHang ?>
                 </h3>
             </div>
 
@@ -27,32 +32,36 @@
 
                 <div class="box-input-bill">
                     <div class="input-bill_name">Người đặt hàng</div>
-                    <div class="bill-thongtin">a</div>
+                    <div class="bill-thongtin"><?= $user ?></div>
                 </div>
 
                 <div class="box-input-bill">
                     <div class="input-bill_name">Địa chỉ</div>                    
-                    <div class="bill-thongtin">a</div>
+                    <div class="bill-thongtin"><?= $address ?></div>
 
                 </div>
 
                 <div class="box-input-bill">
                     <div class="input-bill_name">Email</div>
-                    <div class="bill-thongtin">a</div>
+                    <div class="bill-thongtin"><?= $email ?></div>
                     
                 </div>
 
                 <div class="box-input-bill">
                     <div class="input-bill_name">Điện thoại</div>
-                    <div class="bill-thongtin">a</div>
+                    <div class="bill-thongtin"><?= $tel ?></div>
+                </div>
 
+                <div class="box-input-bill">
+                    <div class="input-bill_name">Ngày đặt hàng</div>
+                    <div class="bill-thongtin"><?= $ngaydathang ?></div>
                 </div>
             </div>
             <div class="box-sanphamct" style="margin-top: 0;">
                 <div class="box-sanphamct_header">
                     Phương thức thanh toán
                 </div>
-                <p style="margin-left: 20px;margin-bottom: 12px;">Trả tiền khi nhận hàng</p>
+                <p style="margin-left: 20px;margin-bottom: 12px;"><?= $pttt ?></p>
             </div>
 
             <div class="box-sanphamct" style="margin-top: 0;">
@@ -71,18 +80,30 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>
-                                    <div class="flex-center">
-                                        <div class="table-giohang_img" style="background-image: url(https://images.pexels.com/photos/54300/pexels-photo-54300.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500);"></div>
-                                    </div>
-                                </td>
-                                <td>aaaa</td>
-                                <td>2</td>
-                                <td>122222 VNĐ</td>
-                            </tr>
+                            <?php foreach ($cart as $sp) : ?>
+                                <?php 
+                                    extract($sp) ;
+                                    $tong += $price * $quantity;
+                                ?>
+                                <tr>
+                                    <td><?= ++$stt ?></td>
+                                    <td>
+                                        <div class="flex-center">
+                                            <div class="table-giohang_img" style="background-image: url(<?= $imgdir . $img ?>);"></div>
+                                        </div>
+                                    </td>
+                                    <td><?= $name ?></td>
+                                    <td><?= $quantity ?></td>
+                                    <td><?= $price * $quantity ?> VNĐ</td>
+                                </tr>
+                            <?php endforeach; ?>
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="4">Tổng tiền</td>
+                                <td > <?= $tong ?> VNĐ</td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>
