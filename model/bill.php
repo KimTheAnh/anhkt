@@ -29,3 +29,12 @@ function get_pttt($pt) {
     $sql = "SELECT thanhtoan.`name` FROM thanhtoan WHERE id = $pt";
     return pdo_query_one($sql);
 }
+
+function reduce_soluong_sp($cart) {
+    foreach($cart as $item) {
+        extract($item);
+        $sql = "UPDATE `duanmau`.`sanpham` SET `soluong` = `soluong` - $quantity WHERE `id` = $id;";
+        pdo_execute($sql);
+    }
+    
+}

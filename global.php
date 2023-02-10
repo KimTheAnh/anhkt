@@ -7,4 +7,8 @@
         echo "</pre>";
         die();
     }
+
+    function echo_json($x) {
+        echo json_encode($x);
+    }
 ?>

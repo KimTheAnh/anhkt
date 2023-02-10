@@ -6,7 +6,7 @@ $tong = 0;
 <main>
     <div class="row">
         <div class="content">
-            <form name="bill-form" action="index.php?act=billcomfirm" method="POST" onsubmit="return validate() ">
+            <form name="bill-form" action="index.php?act=billcomfirm" id="myform" method="POST">
                 <div class="box-sanphamct" style="margin-top: 0;">
                     <div class="box-sanphamct_header">
                         Thông tin đặt hàng
@@ -101,7 +101,7 @@ $tong = 0;
                     </div>
                 </div>
                 <div class="form-loaihang-btns">
-                    <input type="submit" class="form-loaihang-btn" value="Đồng ý đặt hàng">
+                    <div class="form-loaihang-btn" onclick="validate()">Đồng ý đặt hàng</div>
                 </div>
             </form>
 
@@ -113,13 +113,9 @@ $tong = 0;
 </main>
 
 <script>
-    function Delete(id) {
-        var submit = confirm("Bạn có muốn xoá danh mục này ?")
-        if (submit) window.location = 'index.php?act=deletegiohang&id=' + id
-        event.stopPropagation()
-    }
-
+    
     function validate() {
+        var ok = false
         var _thongbao = []
         var name = document.querySelector("input[name='name']").value
         var address = document.querySelector("input[name='address']").value
@@ -127,6 +123,7 @@ $tong = 0;
         var email = document.querySelector("input[name='email']").value
         var _pt = document.querySelectorAll("input[name='phuongthuc']")
         var pttt = 0
+        var _soluong
         _pt.forEach((pt) => {
             if (pt.checked) {
                 pttt = pt.value
@@ -148,24 +145,43 @@ $tong = 0;
             }
         }
 
+        $.get("admin/api.php?act=checkSoLuong",
+            function(res) {
+
+                if (JSON.parse(res) != []) {
+                    JSON.parse(res).forEach((thongbao) => {
+                        _thongbao.push(thongbao)
+                    })
+                }
+            },
+        );
         if (pttt == 0) {
             _thongbao.push("Bạn phải chọn phương thức thanh toán")
         }
 
+        toast({
+            title: "Xử lý!",
+            message: "Đang xử lý đơn hàng xin đợi",
+            type: "warning",
+            duration: 1000
+        });
 
-        if (_thongbao.length == 0) {
-            return true
-        }
-        _thongbao.forEach((thongbao) => {
-            toast({
-                title: "Thất bại!",
-                message: thongbao,
-                type: "error",
-                duration: 5000
-            });
-        })
 
-        return false
+        setTimeout(() => {
+            if (_thongbao.length == 0) {
+                $('#myform').submit()
+            }
+            _thongbao.forEach((thongbao) => {
+                toast({
+                    title: "Thất bại!",
+                    message: thongbao,
+                    type: "error",
+                    duration: 5000
+                });
+            })
+        }, 2000);
+
+        return ok
 
     }
 </script>

@@ -34,18 +34,29 @@
       );
 ?>
 
-<nav>
+
+<nav class="navbar-user">
     <ul class="navbar-list">
         <?php foreach ($listNavbar as $nb) : ?>
             <?php extract($nb) ?>
-            <a href="<?= $link . $actLink ?>" class="navbar-item <?php 
+            <a href="<?= $link . $actLink ?>" class="navbar-item 
+            <?php
             if (!isset($act) && $actLink == "") {
                 echo "here";
-            } else if (isset($act ) && strpos($actLink, $act)) {
+            } else if (isset($act) && strpos($actLink, $act)) {
                 echo "here";
             }
-                
+
             ?>"><?= $name ?></a>
         <?php endforeach; ?>
     </ul>
+    <script>
+        $(document).ready(function() {
+            $("#giohang").load("view/giohang/giohangsm.php");
+        });
+    </script>
+    <div class="giohang">
+        <a href="../index.php" class=" giohang-icon" style="font-size: 20px !important;">Trở về trang web</a>
+        
+    </div>
 </nav>

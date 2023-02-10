@@ -20,12 +20,15 @@
                         </thead>
                         <tbody>
                             <?php foreach ($listsp as $sp) : ?>
-                                <?php extract($sp) ?>
+                                <?php
+                                extract($sp);
+                                $linkImg = explode(", ", $img);
+                                ?>
                                 <tr>
                                     <td><?= ++$stt ?></td>
                                     <td>
                                         <div class="flex-center">
-                                            <div class="table-giohang_img" style="background-image: url(<?= $imgdir . $img ?>);"></div>
+                                            <div class="table-giohang_img" style="background-image: url(<?= $imgdir . $id . '/' . $linkImg[0] ?>);"></div>
                                         </div>
                                     </td>
                                     <td><?= $name ?></td>
@@ -41,7 +44,7 @@
                         </tbody>
                     </table>
                     <div class="form-loaihang-btns">
-                        <div href="" class="form-loaihang-btn" style="margin-top: 20px;" onclick="let_bill()"  >Đặt hàng</div>
+                        <div href="" class="form-loaihang-btn" style="margin-top: 20px;" onclick="let_bill()">Đặt hàng</div>
                     </div>
                 </div>
             </div>
@@ -61,15 +64,31 @@
 
     function let_bill() {
         var item = document.querySelector('tbody').querySelector('tr')
-        if(item) {
-            window.location = 'index.php?act=bill'
-        } else {
-            toast({
-                title: "Thất bại!",
-                message: "Phải có sản phẩm mới có thể đặt hàng",
-                type: "error",
-                duration: 5000
-            });
-        }
+
+        $.get("admin/api.php?act=cart",
+            function(res) {
+                var thongbao = JSON.parse(res)
+
+                if (thongbao == "ok") {
+                    if (item) {
+                        window.location = 'index.php?act=bill'
+                    } else {
+                        toast({
+                            title: "Thất bại!",
+                            message: "Phải có sản phẩm mới có thể đặt hàng",
+                            type: "error",
+                            duration: 5000
+                        });
+                    }
+                } else {
+                    toast({
+                        title: "Thất bại!",
+                        message: thongbao,
+                        type: "error",
+                        duration: 5000
+                    });
+                }
+            },
+        );
     }
 </script>

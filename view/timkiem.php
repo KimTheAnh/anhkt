@@ -7,9 +7,12 @@
             <H1 style="color : red"><?= $thongbao ?></H1>
             <div class="home-product-list">
                 <?php foreach ($listsp as $sp) : ?>
-                    <?php extract($sp) ?>
+                    <?php 
+                        extract($sp);
+                        $linkImg = explode(', ', $img);
+                    ?>
                     <div class="home-product-item" onclick="linksp(<?= $id ?>)">
-                        <div class="home-product-item_img" style="background-image: url(<?= $imgdir . $img ?>);">
+                        <div class="home-product-item_img" style="background-image: url(<?= $imgdir . $id .'/'. $linkImg[0] ?>);">
                         </div>
                         <div class="home-product-item_price">$ <?= $price ?></div>
                         <div class="home-product-item_name"><?= $name ?></div>
@@ -18,7 +21,6 @@
                         </div>
                     </div>
                 <?php endforeach; ?>
-
             </div>
         </div>
         <?php

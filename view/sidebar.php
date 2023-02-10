@@ -67,9 +67,12 @@
         <div class="sidebar_header">TOP 10 YÊU THÍCH</div>
         <div class="toplike-list">
             <?php foreach ($spluotxem as $sp) : ?>
-                <?php extract($sp) ?>
+                <?php 
+                    extract($sp);
+                    $linkImg = explode(', ', $img);
+                ?>
                 <a href="index.php?act=spchitiet&id=<?= $id ?>" class="toplike-item">
-                    <div class="toplike-item_img" style="background-image: url(<?= $imgdir . $img ?>);">
+                    <div class="toplike-item_img" style="background-image: url(<?= $imgdir .$id.'/'. $linkImg[0] ?>);">
                     </div>
                     <div class="toplike-item_name"><?= $name ?></div>
                 </a>

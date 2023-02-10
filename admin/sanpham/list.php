@@ -20,7 +20,11 @@
 
     <tbody>
         <?php foreach ($listsanpham as $sanpham) : ?>
-            <?php extract($sanpham) ?>
+            <?php 
+                extract($sanpham);
+                $linkImg = explode(', ', $img);
+
+            ?>
             <tr onclick="sanphamCheck(this)">
                 <td style="position: relative;"><input type="checkbox" onclick="event.stopPropagation()"></td>
                 <td><?= $id ?></td>
@@ -28,7 +32,7 @@
                 <td><?= $price ?></td>
                 <td>
                     <div class="list-loaihang-table_box-img">
-                        <div class="list-loaihang-table_img" style="background-image: url(sanpham/img/<?= $img ?>);"></div>
+                        <div class="list-loaihang-table_img" style="background-image: url(sanpham/img/<?= $id . "/" . $linkImg[0] ?>);"></div>
                     </div>
                 </td>
                 <td><?= $mota ?></td>

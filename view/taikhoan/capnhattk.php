@@ -10,9 +10,7 @@
                     echo '<p style="color: red">' . $thongbao . '</p>';
                 }
             }
-
             extract($_SESSION['user']);
-
             ?>
             <div class="content form-content">
                 <form class="form-loaihang" action="index.php?act=capnhattk" method="POST">
@@ -34,11 +32,11 @@
                     </div>
                     <div class="form-loaihang-box">
                         <div class="form-loaihang-text">Mật khẩu</div>
-                        <input type="text" class="form-loaihang-input" name="pass" value="<?= $pass ?>">
+                        <input type="password" class="form-loaihang-input" name="pass" value="<?= $pass ?>">
                     </div>
                     <div class="form-loaihang-box">
                         <div class="form-loaihang-text">Nhập lại mật khẩu</div>
-                        <input type="text" class="form-loaihang-input" name="repass" value="<?= $pass ?>">
+                        <input type="password" class="form-loaihang-input" name="repass" value="<?= $pass ?>">
                     </div>
     
                     <div class="form-loaihang-btns">

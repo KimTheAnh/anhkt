@@ -76,9 +76,13 @@
             </script>
             <div class="home-product-list">
                 <?php foreach ($spnew as $sp) : ?>
-                    <?php extract($sp) ?>
+                    <?php 
+                        extract($sp);
+                        $imgLink = explode(", ", $img);
+                        // echo $imgLink;
+                    ?>
                     <div class="home-product-item" onclick="linksp(<?= $id ?>)">
-                        <div class="home-product-item_img" style="background-image: url(<?= $imgdir . $img ?>);">
+                        <div class="home-product-item_img" style="background-image: url(<?= $imgdir . $id . '/' . $imgLink[0] ?>);">
                         </div>
                         <div class="home-product-item_price">$ <?= $price ?></div>
                         <div class="home-product-item_name"><?= $name ?></div>

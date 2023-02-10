@@ -21,9 +21,12 @@ $cart = $_SESSION['cart'];
     <?php } else { ?>
         <div class="giohang-title">Sản phẩm thêm vào</div>
         <?php foreach ($cart as $item) : ?>
-            <?php extract($item) ?>
+            <?php 
+                extract($item);
+                $linkImg = explode(', ', $img); 
+            ?>
             <div class="giohang-item">
-                <div class="giohang-item-img" style="background-image: url(<?= $imgdir.$img ?>);"></div>
+                <div class="giohang-item-img" style="background-image: url(<?= $imgdir.$id.'/'.$linkImg[0] ?>);"></div>
                 <div class="giohang-item-name"><?= $name ?></div>
                 <div class="giohang-item-price"><?= $price ?> VNĐ</div>
             </div>

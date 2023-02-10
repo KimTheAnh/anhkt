@@ -29,8 +29,10 @@ if (isset($_GET['act']) && $_GET['act'] != "") {
 
         case 'spchitiet':
             $id = $_GET['id'];
+            increase_spluotxem($id);
             $sp = load_sanpham($id);
             extract($sp);
+            $linkImg = explode(', ', $img);
             $listsp = get_listsanpham_loai($id, $iddm);
             require "view/spchitiet.php";
             break;
@@ -215,6 +217,7 @@ if (isset($_GET['act']) && $_GET['act'] != "") {
                 if (isset($_SESSION['user'])) {
                     $idUser = $_SESSION['user']['id'];
                     $idDonHang = add_bill_login($idUser, $cart, $pt, $ngaydathang);
+                    reduce_soluong_sp($cart);
                     $_SESSION['cart'] = [];
                     $info = $_SESSION['user'];
                     extract($info);
@@ -224,6 +227,7 @@ if (isset($_GET['act']) && $_GET['act'] != "") {
                     $email = $_POST['email'];
                     $tel = $_POST['tel'];
                     $idDonHang = add_bill($user, $address, $email, $tel, $cart, $pt, $ngaydathang);
+                    reduce_soluong_sp($cart);
                     $_SESSION['cart'] = [];
                 }
                 include "view/bill/billcomfirm.php";
@@ -234,7 +238,7 @@ if (isset($_GET['act']) && $_GET['act'] != "") {
 
         case 'thoat':
             unset($_SESSION['user']);
-            header("Location:" . $_SERVER['HTTP_REFERER']);
+            header("Location: index.php");
             break;
 
         default:

@@ -11,11 +11,6 @@
         require "navbar.php";
         switch ($act) {
             case 'adddm':
-                if (isset($_POST['themmoi'])) {
-                    $tenloai = $_POST['tenloai'];
-                    add_danhmuc($tenloai);
-                    $thongbao = "Thêm thành công";
-                }
                 require "danhmuc/add.php";
                 break;
 
@@ -61,25 +56,25 @@
 
             case 'addsp':
                 $listdanhmuc = get_listdanhmuc();
-                if (isset($_POST['themmoi'])) {
-                    $sql = "SELECT sanpham.`id` FROM sanpham ORDER BY sanpham.id DESC LIMIT 1";
-                    $id = pdo_query_one($sql)['id'];
-                    $tensanpham = $_POST['tensanpham'];
-                    $giasanpham = $_POST['giasanpham'];
-                    $motasanpham = $_POST['motasanpham'];
-                    $danhmucsanpham = $_POST['danhmucsanpham'];
+                // if (isset($_POST['themmoi'])) {
+                //     $sql = "SELECT sanpham.`id` FROM sanpham ORDER BY sanpham.id DESC LIMIT 1";
+                //     $id = pdo_query_one($sql)['id'];
+                //     $tensanpham = $_POST['tensanpham'];
+                //     $giasanpham = $_POST['giasanpham'];
+                //     $motasanpham = $_POST['motasanpham'];
+                //     $danhmucsanpham = $_POST['danhmucsanpham'];
                     
-                    if(isset($_FILES['anhsanpham'])) {
-                        $dir = "sanpham/img/";
-                        $imgUpload = $_FILES['anhsanpham']['name'];
-                        $imgFileType = pathinfo($imgUpload,PATHINFO_EXTENSION);
-                        $imgName = ++$id.'.'.$imgFileType;
-                        $imgLink = $dir.$imgName;
-                        move_uploaded_file($_FILES['anhsanpham']['tmp_name'], $imgLink);
-                    }
-                    add_sanpham($id, $tensanpham, $giasanpham, $imgName, $motasanpham, $danhmucsanpham);
-                    $thongbao = "Thêm thành công";
-                }
+                //     if(isset($_FILES['anhsanpham'])) {
+                //         $dir = "sanpham/img/";
+                //         $imgUpload = $_FILES['anhsanpham']['name'];
+                //         $imgFileType = pathinfo($imgUpload,PATHINFO_EXTENSION);
+                //         $imgName = ++$id.'.'.$imgFileType;
+                //         $imgLink = $dir.$imgName;
+                //         move_uploaded_file($_FILES['anhsanpham']['tmp_name'], $imgLink);
+                //     }
+                //     add_sanpham($id, $tensanpham, $giasanpham, $imgName, $motasanpham, $danhmucsanpham);
+                //     $thongbao = "Thêm thành công";
+                // }
                 require "sanpham/add.php";
                 break;
 

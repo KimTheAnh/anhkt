@@ -24,6 +24,11 @@ function get_sanpham_luotxem($st, $ed) {
     return $listsanpham;
 }
 
+function increase_spluotxem($id) {
+    $sql = "UPDATE `duanmau`.`sanpham` SET `luotxem` = `luotxem` + 1 WHERE `id` = $id;";
+    pdo_execute($sql);
+}
+
 function list_sanpham()
 {
     $sql = "SELECT sanpham.id, sanpham.`name`, sanpham.price, sanpham.img, sanpham.mota, sanpham.luotxem, danhmuc.`name` AS `namedm` FROM sanpham JOIN danhmuc ON sanpham.iddm = danhmuc.id";
@@ -67,7 +72,7 @@ function delete_sanpham_check($_id)
 
 function load_sanpham($id)
 {
-    $sql = "SELECT sanpham.id, sanpham.`name`, sanpham.price, sanpham.img, sanpham.mota, sanpham.luotxem, sanpham.iddm FROM sanpham WHERE sanpham.id = $id";
+    $sql = "SELECT * FROM sanpham WHERE sanpham.id = $id";
     $sp = pdo_query_one($sql);
     return $sp;
 }
@@ -82,4 +87,9 @@ function get_listsanpham_name($kyw) {
     $sql = "SELECT * FROM sanpham WHERE sanpham.`name` LIKE '%$kyw%'";
     $listsp = pdo_query($sql);
     return $listsp;
+}
+
+function get_soluongsp($id) {
+    $sql = "SELECT sanpham.soluong FROM sanpham WHERE sanpham.id = 31";
+    return pdo_query_one($sql)['soluong'];
 }

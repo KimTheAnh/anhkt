@@ -5,6 +5,13 @@ function add_taikhoan($user, $pass, $email)
     pdo_execute($sql);
 }
 
+function check_user_isExist($user) {
+    $sql = "SELECT * FROM taikhoan WHERE taikhoan.`user` = '$user'";
+    $check = pdo_query_one($sql);
+    if($check == []) return false;
+    return true;
+}
+
 function get_user($user, $pass)
 {
     $sql = "SELECT * FROM taikhoan WHERE user = '$user' AND pass = '$pass'";

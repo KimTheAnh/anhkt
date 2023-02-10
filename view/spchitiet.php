@@ -2,13 +2,14 @@
     <div class="row column-3-1">
         <div class="content">
             <div class="box-spchitiet">
-                <div class="box-spchitiet_img" style="background-image: url(<?= $imgdir . $img ?>);"></div>
+                <div class="box-spchitiet_img" style="background-image: url(<?= $imgdir . $id .'/'. $linkImg[0] ?>);"></div>
                 <div class="flex flex-bw">
                     <ul class="box-spchitiet_info">
                         <li>MÃ HH: <?= $id ?></li>
                         <li>TÊN HÀNG HOÁ: <?= $name ?></li>
                         <li>ĐƠN GIÁ: <?= $price ?> $</li>
                         <li>GIẢM GIÁ: 0%</li>
+                        <li>SỐ LƯỢNG TRONG KHO: <?= $soluong ?></li>
                     </ul>
                     <div class="box-spchitiet_addgiohang">
                         <div class="box-spchitiet_quantity">
