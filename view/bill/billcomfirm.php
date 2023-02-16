@@ -83,13 +83,14 @@
                             <?php foreach ($cart as $sp) : ?>
                                 <?php 
                                     extract($sp) ;
+                                    $linkImg = explode(", ", $img);
                                     $tong += $price * $quantity;
                                 ?>
                                 <tr>
                                     <td><?= ++$stt ?></td>
                                     <td>
                                         <div class="flex-center">
-                                            <div class="table-giohang_img" style="background-image: url(<?= $imgdir . $img ?>);"></div>
+                                            <div class="table-giohang_img" style="background-image: url(<?= $imgdir . $id . '/' . $linkImg[0] ?>);"></div>
                                         </div>
                                     </td>
                                     <td><?= $name ?></td>

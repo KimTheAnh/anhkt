@@ -1,7 +1,8 @@
 <?php
 function add_sanpham($id, $tensanpham, $giasanpham, $imgName, $motasanpham, $danhmucsanpham)
 {
-    $sql = "INSERT INTO `duanmau`.`sanpham` (`id`, `name`, `price`, `img`, `mota`, `iddm`) VALUES ($id , '$tensanpham', $giasanpham, '$imgName', '$motasanpham', $danhmucsanpham)";
+    $sql = "INSERT INTO `duanmau`.`sanpham` (`id`, `name`, `price`, `img`, `mota`, `iddm`) 
+    VALUES ($id , '$tensanpham', $giasanpham, '$imgName', '$motasanpham', $danhmucsanpham)";
     pdo_execute($sql);
 }
 
@@ -13,13 +14,15 @@ function get_listdanhmuc()
 }
 
 function get_listsanpham_home($st, $ed) {
-    $sql = "SELECT sanpham.id, sanpham.`name`, sanpham.price, sanpham.img FROM sanpham ORDER BY sanpham.id DESC LIMIT $st,$ed";
+    $sql = "SELECT sanpham.id, sanpham.`name`, sanpham.price, sanpham.img FROM sanpham 
+    ORDER BY sanpham.id DESC LIMIT $st,$ed";
     $listsanpham = pdo_query($sql);
     return $listsanpham;
 }
 
 function get_sanpham_luotxem($st, $ed) {
-    $sql = "SELECT sanpham.id, sanpham.`name`, sanpham.img FROM sanpham ORDER BY sanpham.luotxem DESC LIMIT $st,$ed";
+    $sql = "SELECT sanpham.id, sanpham.`name`, sanpham.img FROM sanpham 
+    ORDER BY sanpham.luotxem DESC LIMIT $st,$ed";
     $listsanpham = pdo_query($sql);
     return $listsanpham;
 }
@@ -31,7 +34,8 @@ function increase_spluotxem($id) {
 
 function list_sanpham()
 {
-    $sql = "SELECT sanpham.id, sanpham.`name`, sanpham.price, sanpham.img, sanpham.mota, sanpham.luotxem, danhmuc.`name` AS `namedm` FROM sanpham JOIN danhmuc ON sanpham.iddm = danhmuc.id";
+    $sql = "SELECT sanpham.id, sanpham.`name`, sanpham.price, sanpham.img, sanpham.mota, sanpham.luotxem, danhmuc.`name` AS `namedm` 
+    FROM sanpham JOIN danhmuc ON sanpham.iddm = danhmuc.id";
     $listsanpham = pdo_query($sql);
     return $listsanpham;
 }
@@ -78,7 +82,8 @@ function load_sanpham($id)
 }
 
 function get_listsanpham_loai($id ,$iddanhmuc) {
-    $sql = "SELECT sanpham.id, sanpham.`name` FROM sanpham WHERE sanpham.iddm = $iddanhmuc AND sanpham.id != $id";
+    $sql = "SELECT sanpham.id, sanpham.`name` FROM sanpham 
+    WHERE sanpham.iddm = $iddanhmuc AND sanpham.id != $id";
     $listsp = pdo_query($sql);
     return $listsp;
 }
@@ -90,6 +95,18 @@ function get_listsanpham_name($kyw) {
 }
 
 function get_soluongsp($id) {
-    $sql = "SELECT sanpham.soluong FROM sanpham WHERE sanpham.id = 31";
+    $sql = "SELECT sanpham.soluong FROM sanpham WHERE sanpham.id = $id";
     return pdo_query_one($sql)['soluong'];
+}
+
+function get_top10_luotxem() {
+    $sql = "SELECT sanpham.`name`, sanpham.luotxem FROM sanpham ORDER BY sanpham.luotxem DESC LIMIT 10";
+    return pdo_query($sql);
+}
+
+function get_top10_banchay() {
+    $sql = "SELECT sanpham.`name` ,SUM(donhangct.soluong) as soluong FROM donhangct 
+    INNER JOIN sanpham ON donhangct.idsp = sanpham.id GROUP BY donhangct.idsp 
+    ORDER BY soluong DESC ";
+    return pdo_query($sql);
 }

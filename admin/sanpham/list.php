@@ -35,13 +35,15 @@
                         <div class="list-loaihang-table_img" style="background-image: url(sanpham/img/<?= $id . "/" . $linkImg[0] ?>);"></div>
                     </div>
                 </td>
-                <td><?= $mota ?></td>
+                <!-- <td><?= $mota ?></td> -->
                 <td><?= $luotxem ?></td>
                 <td><?= $namedm ?></td>
                 <td>
                     <div class="form-loaihang-btns">
                         <div class="form-loaihang-btn" onclick="sanphamUpdate(<?= $id ?>)">Sửa</div>
                         <div class="form-loaihang-btn" onclick="sanphamDelete(<?= $id ?>)">Xoá</div>
+                        <div class="form-loaihang-btn" onclick="inputSoLuong(<?= $id ?>, this)">Thêm số lượng</div>
+                        <input id="themluong" type="number" min='0' step="1" value="0" style="">
                     </div>
                 </td>
             </tr>
@@ -56,10 +58,19 @@
 </div>
 </div>
 <script>
+    // var a = document.querySelector('a')
+    // a.
     function sanphamDelete(id) {
         var submit = confirm("Bạn có muốn xoá danh mục này ?")
         if (submit) window.location = 'index.php?act=xoasanpham&id=' + id
         event.stopPropagation()
+    }
+
+    function inputSoLuong(id, e) {
+        
+        e.replaceWith(e.parentElement.querySelector('#themluong'))
+        event.stopPropagation()
+
     }
 
     function sanphamUpdate(id) {

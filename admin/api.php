@@ -134,5 +134,43 @@ if (isset($_GET['act'])) {
                 }
                 echo_json($thongbao);
                 break;
+            
+            case 'thongke':
+                switch ($_POST['name']) {
+                    case 'soluotxem':
+                        $listsp = get_top10_luotxem();
+                        $_name = [];
+                        $_luotxem = [];
+                        foreach($listsp as $sp) {
+                            $_name[] = $sp['name'];
+                            $_luotxem[] = $sp['luotxem'];
+                        };
+                        $data = [
+                            'label' => $_name,
+                            'data' => $_luotxem,
+                            'name' => 'Top 10 lượt xem'
+                        ];
+
+                        echo_json($data);
+                        break;
+
+                    case 'hangbanchay':
+                        $listsp = get_top10_banchay();
+                        $_name = [];
+                        $_soluong = [];
+                        foreach($listsp as $sp) {
+                            $_name[] = $sp['name'];
+                            $_soluong[] = $sp['soluong'];
+                        };
+                        $data = [
+                            'label' => $_name,
+                            'data' => $_soluong,
+                            'name' => 'Top 10 bán chạy'
+                        ];
+
+                        echo_json($data);
+                        break;
+                }
+                break;
     }
 }

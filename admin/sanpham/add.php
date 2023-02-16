@@ -12,15 +12,18 @@ if (isset($thongbao) && $thongbao != '') echo $thongbao;
         <input type="text" class="form-loaihang-input" disabled placeholder="Mã tự tăng">
     </div>
     <div class="form-loaihang-box">
-        <div class="form-loaihang-text" >Tên sản phẩm<p style="color: red;display:inline-block">(*)</p></div>
+        <div class="form-loaihang-text">Tên sản phẩm<p style="color: red;display:inline-block">(*)</p>
+        </div>
         <input type="text" name="tensanpham" class="form-loaihang-input">
     </div>
     <div class="form-loaihang-box">
-        <div class="form-loaihang-text">Giá sản phẩm<p style="color: red;display:inline-block">(*)</p></div>
+        <div class="form-loaihang-text">Giá sản phẩm<p style="color: red;display:inline-block">(*)</p>
+        </div>
         <input type="number" name="giasanpham" class="form-loaihang-input" min="0">
     </div>
     <div class="form-loaihang-box">
-        <div class="form-loaihang-text">Ảnh sản phẩm<p style="color: red;display:inline-block">(*)</p></div>
+        <div class="form-loaihang-text">Ảnh sản phẩm<p style="color: red;display:inline-block">(*)</p>
+        </div>
         <input id="anh" type="file" name="anhsanpham[]" class="form-loaihang-input" multiple>
     </div>
     <div class="form-loaihang-box">
@@ -28,7 +31,8 @@ if (isset($thongbao) && $thongbao != '') echo $thongbao;
         <textarea name="motasanpham" id="" cols="30" rows="10"></textarea>
     </div>
     <div class="form-loaihang-box">
-        <div class="form-loaihang-text">Danh mục sản phẩm<p style="color: red;display:inline-block">(*)</p></div>
+        <div class="form-loaihang-text">Danh mục sản phẩm<p style="color: red;display:inline-block">(*)</p>
+        </div>
         <select name="danhmucsanpham" id="" class="form-loaihang-input " style="width: 30%;">
             <?php foreach ($listdanhmuc as $danhmuc) : ?>
                 <?php extract($danhmuc) ?>
@@ -62,10 +66,10 @@ if (isset($thongbao) && $thongbao != '') echo $thongbao;
         form_data.append('motasanpham', motasanphamValue);
         form_data.append('danhmucsanpham', danhmucsanphamValue);
 
-        
+
 
         var _file_data = $('#anh').prop('files'); //Fetch the file
-        for(var i = 0; i < _file_data.length; i++ ){
+        for (var i = 0; i < _file_data.length; i++) {
             form_data.append("file[]", _file_data[i]);
         }
 
@@ -92,13 +96,13 @@ if (isset($thongbao) && $thongbao != '') echo $thongbao;
                 } else {
                     thongbao.forEach(i => {
                         toast({
-                        title: "Thất bại!",
-                        message: i,
-                        type: "error",
-                        duration: 5000
+                            title: "Thất bại!",
+                            message: i,
+                            type: "error",
+                            duration: 5000
+                        });
                     });
-                    });
-                    
+
                 }
             }
         });

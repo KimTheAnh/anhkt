@@ -372,6 +372,13 @@ main {
     margin-bottom: 8px;
 }
 
+#themluong {
+    width: 110px;
+    padding: 4px 8px ;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
 .form-loaihang-input {
     width: 100%;
     padding: 6px 12px;
@@ -382,6 +389,7 @@ main {
 .form-loaihang-btns {
     display: flex;
     column-gap: 8px;
+    justify-content: center;
 }
 
 .form-loaihang-btn {
@@ -434,13 +442,13 @@ main {
     border-bottom: 1px solid var(--border-color);
     line-height: 40px;
 }
-
+/* 
 .list-loaihang-table td input {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-}
+} */
 
 .box-spchitiet {
     border: 1px solid var(--border-color);

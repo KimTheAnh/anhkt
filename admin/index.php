@@ -175,6 +175,9 @@
                     header("Location:index.php?act=dskh");
                     break;
                 
+                case 'thongke':
+                    require 'thongke/thongke.php';
+                    break;
             default:
                 require "home.php";
                 break;
