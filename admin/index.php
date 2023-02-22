@@ -1,11 +1,19 @@
 <?php
+    session_start();
     require "header.php";
     require "../model/pdo.php";
     require "../model/danhmuc.php";
     require "../model/sanpham.php";
     require "../model/taikhoan.php";
     require "../model/binhluan.php";
-    
+    require "../global.php";
+    if(isset($_SESSION['user'])) {
+        if($_SESSION['user']['role'] == 0) {
+            header('Location:../index.php');
+        }
+    } else {
+        header('Location:../index.php');
+    }
     if(isset($_GET['act'])) {
         $act = $_GET['act'];
         require "navbar.php";
@@ -112,7 +120,8 @@
                         $motasanpham = $_POST['motasanpham'];
                         $luotxemsanpham = $_POST['luotxemsanpham'];
                         $danhmucsanpham = $_POST['danhmucsanpham'];
-                        update_sanpham($masanpham , $tensanpham, $giasanpham, $motasanpham, $luotxemsanpham, $danhmucsanpham);
+                        $soluongsanpham = $_POST['soluongsanpham'];
+                        update_sanpham($masanpham , $tensanpham, $giasanpham, $motasanpham, $luotxemsanpham, $danhmucsanpham,$soluongsanpham);
                     }
                     header("Location:index.php?act=listsanpham");
                     break;

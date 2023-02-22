@@ -68,7 +68,7 @@
     
     const config = {
         type: 'bar',
-        data: data2,
+        data: data,
         options: {
             scales: {
                 y: {

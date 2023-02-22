@@ -6,6 +6,11 @@ function add_sanpham($id, $tensanpham, $giasanpham, $imgName, $motasanpham, $dan
     pdo_execute($sql);
 }
 
+function add_soluong($id, $soluong) {
+    $sql = "UPDATE `duanmau`.`sanpham` SET `soluong` = sanpham.soluong + $soluong WHERE `id` = $id;";
+    pdo_execute($sql);
+}
+
 function get_listdanhmuc()
 {
     $sql = "SELECT danhmuc.`id`, danhmuc.`name` FROM danhmuc ORDER BY danhmuc.id ASC";
@@ -53,9 +58,9 @@ function delete_sanpham($id)
     pdo_execute($sql);
 }
 
-function update_sanpham($masanpham, $tensanpham, $giasanpham, $motasanpham, $luotxemsanpham, $danhmucsanpham)
+function update_sanpham($masanpham, $tensanpham, $giasanpham, $motasanpham, $luotxemsanpham, $danhmucsanpham, $soluongsanpham)
 {
-    $sql = "UPDATE `duanmau`.`sanpham` SET `name` = '$tensanpham', `price` = $giasanpham, `mota` = '$motasanpham', `luotxem` = $luotxemsanpham, `iddm` = $danhmucsanpham WHERE `id` = $masanpham;";
+    $sql = "UPDATE `duanmau`.`sanpham` SET `name` = '$tensanpham', `price` = $giasanpham, `mota` = '$motasanpham', `luotxem` = $luotxemsanpham, `iddm` = $danhmucsanpham, `soluong` = $soluongsanpham WHERE `id` = $masanpham;";
     pdo_execute($sql);
 }
 
@@ -109,4 +114,10 @@ function get_top10_banchay() {
     INNER JOIN sanpham ON donhangct.idsp = sanpham.id GROUP BY donhangct.idsp 
     ORDER BY soluong DESC ";
     return pdo_query($sql);
+}
+
+function get_soluong($id) {
+    $sql = "SELECT sanpham.soluong FROM sanpham WHERE `id` = $id";
+    $soluong = pdo_query_one($sql)['soluong'];
+    return $soluong;
 }

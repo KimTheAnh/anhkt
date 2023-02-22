@@ -28,6 +28,10 @@
         <input type="number" name="luotxemsanpham" class="form-loaihang-input" min="0" value="<?= $sp['luotxem'] ?>">
     </div>
     <div class="form-loaihang-box">
+        <div class="form-loaihang-text">Số lượng sản phẩm</div>
+        <input type="number" name="soluongsanpham" class="form-loaihang-input" min="0" value="<?= $sp['soluong'] ?>">
+    </div>
+    <div class="form-loaihang-box">
         <div class="form-loaihang-text">Danh mục sản phẩm</div>
         <select name="danhmucsanpham" id="" class="form-loaihang-input " style="width: 30%;">
             <?php foreach ($listdanhmuc as $danhmuc) : ?>

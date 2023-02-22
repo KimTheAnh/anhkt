@@ -86,6 +86,7 @@ if (isset($_GET['act'])) {
                 if ($thongbao == []) {
                     $sql = "SELECT sanpham.`id` FROM sanpham ORDER BY sanpham.id DESC LIMIT 1";
                     $id = pdo_query_one($sql)['id'];
+                    // dd($id);
                     $id++;
                     mkdir('sanpham/img/' . $id, 0777, true);
                     $dir = "sanpham/img/" . $id . "/";
@@ -135,6 +136,16 @@ if (isset($_GET['act'])) {
                 echo_json($thongbao);
                 break;
             
+
+            case 'nhapluong':
+                $soluong = $_POST['soluong'];
+                $id = $_POST['id'];
+                add_soluong($id, $soluong);
+                $sql = "SELECT sanpham.soluong FROM sanpham WHERE `id` = $id";
+                $luongSP = get_soluong($id);
+                echo_json($luongSP);
+                break;
+            
             case 'thongke':
                 switch ($_POST['name']) {
                     case 'soluotxem':
@@ -170,6 +181,7 @@ if (isset($_GET['act'])) {
 
                         echo_json($data);
                         break;
+                        
                 }
                 break;
     }

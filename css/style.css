@@ -377,6 +377,7 @@ main {
     padding: 4px 8px ;
     border: 1px solid var(--border-color);
     border-radius: 4px;
+    display: none;
 }
 
 .form-loaihang-input {
@@ -898,4 +899,9 @@ main {
 
 .box-spchitiet_quantity input {
     width: 50px;
+}
+
+#anh::-webkit-file-upload-button {
+    background-color: white;
+    border: 0px;
 }

@@ -34,6 +34,7 @@ if (isset($thongbao) && $thongbao != '') echo $thongbao;
         <div class="form-loaihang-text">Danh mục sản phẩm<p style="color: red;display:inline-block">(*)</p>
         </div>
         <select name="danhmucsanpham" id="" class="form-loaihang-input " style="width: 30%;">
+            <!-- <option value="0" disabled>--- Chọn danh mục ---</option> -->
             <?php foreach ($listdanhmuc as $danhmuc) : ?>
                 <?php extract($danhmuc) ?>
                 <option value="<?= $id ?>"><?= $name ?></option>

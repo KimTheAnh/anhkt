@@ -19,7 +19,7 @@ $cart = $_SESSION['cart'];
     <?php if(empty($cart)) { ?>
         <div class="giohang-empty">Không có sản phẩm</div>
     <?php } else { ?>
-        <div class="giohang-title">Sản phẩm thêm vào</div>
+        <div class="giohang-title">Sản phẩm trong giỏ</div>
         <?php foreach ($cart as $item) : ?>
             <?php 
                 extract($item);
